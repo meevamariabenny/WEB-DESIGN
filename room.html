@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room Inventory & Complaints</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Room 104 Inventory</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Study Table</td>
+                <td>02</td>
+                <td style="color:green; font-weight:bold;">OK</td>
+            </tr>
+            <tr>
+                <td>Ceiling Fan</td>
+                <td>01</td>
+                <td style="color:green; font-weight:bold;">OK</td>
+            </tr>
+            <tr>
+                <td>Window Pane</td>
+                <td>02</td>
+                <td style="color:red; font-weight:bold;">CRACKED</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Report an Issue</h2>
+    <label>Select Item:</label>
+    <select id="item-select">
+        <option>Fan</option>
+        <option>Light/Bulb</option>
+        <option>Furniture</option>
+        <option>Plumbing</option>
+    </select>
+
+    <label>Issue Details:</label>
+    <textarea id="issue-desc" rows="4" placeholder="Describe the problem here..."></textarea>
+
+    <button class="btn" onclick="handleSubmission()">Submit Complaint</button>
+
+    <a href="index.html" class="btn btn-secondary">Back to Home</a>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

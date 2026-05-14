@@ -1,0 +1,76 @@
+/* General Layout */
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: #f0f0f0; 
+    padding: 40px 20px; 
+    color: #222;
+    margin: 0;
+}
+
+.container { 
+    max-width: 600px; 
+    margin: auto; 
+    background: white; 
+    padding: 30px; 
+    border: 1px solid #ccc; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Typography */
+h1, h2 { 
+    border-bottom: 2px solid #333; 
+    padding-bottom: 10px; 
+    text-align: center;
+}
+
+/* Navigation & Buttons */
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn {
+    background: #333;
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn:hover { background: #555; }
+
+.btn-secondary {
+    background: #777;
+    margin-top: 20px;
+}
+
+/* Tables & Forms */
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 20px 0; 
+}
+
+th, td { 
+    padding: 12px; 
+    border: 1px solid #ddd; 
+    text-align: left; 
+}
+
+th { background-color: #eee; }
+
+input, select, textarea { 
+    width: 100%; 
+    padding: 10px; 
+    margin: 10px 0 20px 0; 
+    box-sizing: border-box; 
+    border: 1px solid #ccc;
+}
