@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Library Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --input-bg: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            color: var(--text-main);
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-main);
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 24px;
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: var(--text-main);
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        input, button {
+            padding: 12px 14px;
+            margin: 8px 0;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        input {
+            background-color: var(--input-bg);
+            color: var(--text-main);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            margin: 0;
+            font-size: 24px;
+            color: #818cf8;
+        }
+
+        .stat-card p {
+            margin: 4px 0 0 0;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .login-box {
+            max-width: 400px;
+            margin: 50px auto;
+            background: #1e293b;
+            padding: 35px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .user-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0f172a;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .user-banner button {
+            width: auto;
+            margin: 0;
+            padding: 6px 14px;
+            background-color: #ef4444;
+            font-size: 12px;
+        }
+
+        .user-banner button:hover {
+            background-color: #dc2626;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 10px;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #1e293b;
+            color: var(--text-main);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            background-color: #0f172a;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr td:nth-child(2) { color: var(--text-main); font-weight: 500; }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .badge-available { background-color: rgba(22, 101, 52, 0.4); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
+        .badge-issued { background-color: rgba(153, 27, 27, 0.4); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.3); }
+
+        .msg {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 13px;
+            display: none;
+        }
+
+        .success { background-color: rgba(22, 101, 52, 0.4); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
+        .error { background-color: rgba(153, 27, 27, 0.4); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.3); }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+        @media (max-width: 850px) { .grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr; } .container { padding: 20px; } }
+    </style>
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen" class="login-box">
+        <h1>🔐 Student Login</h1>
+        <div class="subtitle">Smart Library System</div>
+        <input type="text" id="loginName" placeholder="Enter Your Name">
+        <input type="text" id="loginAdm" placeholder="Enter Admission Number (e.g. 1045)">
+        <button onclick="handleLogin()">Login to Dashboard</button>
+        <div id="loginMsg" class="msg"></div>
+    </div>
+
+    <!-- MAIN DASHBOARD (Hidden until login) -->
+    <div id="mainDashboard" class="container" style="display: none;">
+        <h1>📚 Smart Library Management System</h1>
+
+        <!-- User Info Banner -->
+        <div class="user-banner">
+            <div>👤 Logged in as: <b id="displayUser" style="color: #f8fafc;"></b> (Adm No: <b id="displayAdm" style="color: #f8fafc;"></b>)</div>
+            <button onclick="handleLogout()">Logout</button>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 id="statTotal">0</h3>
+                <p>Total Books</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="statAvail" style="color: #4ade80;">0</h3>
+                <p>Available</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="statIssued" style="color: #f87171;">0</h3>
+                <p>Issued</p>
+            </div>
+        </div>
+
+        <!-- Book List Section -->
+        <div class="section">
+            <h2>📖 Library Catalog</h2>
+            <input type="text" id="searchBox" placeholder="🔍 Search book by Title, Author or ID..." onkeyup="renderBooks()">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Status</th>
+                        <th>Borrower</th>
+                    </tr>
+                </thead>
+                <tbody id="bookTable"></tbody>
+            </table>
+        </div>
+
+        <div class="grid">
+            <!-- Add Book Section -->
+            <div class="section">
+                <h2>➕ Add Book</h2>
+                <input type="number" id="addId" placeholder="Book ID (e.g. 106)">
+                <input type="text" id="addTitle" placeholder="Book Title">
+                <input type="text" id="addAuthor" placeholder="Author Name">
+                <button onclick="addBook()">Add to Shelf</button>
+                <div id="addMsg" class="msg"></div>
+            </div>
+
+            <!-- Issue Book Section -->
+            <div class="section">
+                <h2>📤 Issue Book</h2>
+                <input type="number" id="issueId" placeholder="Book ID">
+                <button onclick="issueBook()">Issue Book to Me</button>
+                <div id="issueMsg" class="msg"></div>
+            </div>
+
+            <!-- Return Book Section -->
+            <div class="section">
+                <h2>📥 Return Book</h2>
+                <input type="number" id="returnId" placeholder="Book ID">
+                <button onclick="returnBook()" style="background-color: #10b981;">Return Book</button>
+                <div id="returnMsg" class="msg"></div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    let currentUser = { name: "", adm: "" };
+
+    let books = [
+        { id: 101, title: "Data Structures in Java", author: "Robert Lafore", avail: true, borrower: "-" },
+        { id: 102, title: "Introduction to Algorithms", author: "Thomas Cormen", avail: true, borrower: "-" },
+        { id: 103, title: "Clean Code", author: "Robert C. Martin", avail: true, borrower: "-" },
+        { id: 104, title: "Operating System Concepts", author: "Abraham Silberschatz", avail: true, borrower: "-" },
+        { id: 105, title: "Let Us C", author: "Yashavant Kanetkar", avail: true, borrower: "-" }
+    ];
+
+    function handleLogin() {
+        let name = document.getElementById('loginName').value.trim();
+        let adm = document.getElementById('loginAdm').value.trim();
+
+        if(!name || !adm) {
+            let msgEl = document.getElementById('loginMsg');
+            msgEl.innerText = "Please enter both Name and Admission Number.";
+            msgEl.className = "msg error";
+            msgEl.style.display = "block";
+            return;
+        }
+
+        currentUser.name = name;
+        currentUser.adm = adm;
+
+        document.getElementById('displayUser').innerText = name;
+        document.getElementById('displayAdm').innerText = adm;
+
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('mainDashboard').style.display = 'block';
+        renderBooks();
+    }
+
+    function handleLogout() {
+        document.getElementById('loginName').value = "";
+        document.getElementById('loginAdm').value = "";
+        document.getElementById('loginMsg').style.display = "none";
+        document.getElementById('mainDashboard').style.display = 'none';
+        document.getElementById('loginScreen').style.display = 'block';
+    }
+
+    function renderBooks() {
+        const tbody = document.getElementById('bookTable');
+        const query = document.getElementById('searchBox').value.toLowerCase();
+        tbody.innerHTML = "";
+
+        let filtered = books.filter(b => 
+            b.title.toLowerCase().includes(query) || 
+            b.author.toLowerCase().includes(query) || 
+            b.id.toString().includes(query)
+        );
+
+        filtered.forEach(b => {
+            let tr = document.createElement('tr');
+            let statusBadge = b.avail 
+                ? `<span class="badge badge-available">Available</span>` 
+                : `<span class="badge badge-issued">Issued</span>`;
+            
+            tr.innerHTML = `
+                <td><b style="color: #f8fafc;">#${b.id}</b></td>
+                <td>${b.title}</td>
+                <td>${b.author}</td>
+                <td>${statusBadge}</td>
+                <td>${b.borrower}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // Update Stats
+        document.getElementById('statTotal').innerText = books.length;
+        document.getElementById('statAvail').innerText = books.filter(b => b.avail).length;
+        document.getElementById('statIssued').innerText = books.filter(b => !b.avail).length;
+    }
+
+    function showMsg(elementId, text, isSuccess) {
+        let el = document.getElementById(elementId);
+        el.innerText = text;
+        el.className = "msg " + (isSuccess ? "success" : "error");
+        el.style.display = "block";
+        setTimeout(() => el.style.display = "none", 4000);
+    }
+
+    function addBook() {
+        let id = parseInt(document.getElementById('addId').value);
+        let title = document.getElementById('addTitle').value.trim();
+        let author = document.getElementById('addAuthor').value.trim();
+
+        if(!id || !title || !author) {
+            showMsg('addMsg', "Please fill every field.", false);
+            return;
+        }
+        if(books.some(b => b.id === id)) {
+            showMsg('addMsg', "Duplicate Book ID exists.", false);
+            return;
+        }
+
+        books.push({ id, title, author, avail: true, borrower: "-" });
+        books.sort((a, b) => a.id - b.id);
+        renderBooks();
+        showMsg('addMsg', `Successfully added "${title}"!`, true);
+        
+        document.getElementById('addId').value = "";
+        document.getElementById('addTitle').value = "";
+        document.getElementById('addAuthor').value = "";
+    }
+
+    function issueBook() {
+        let id = parseInt(document.getElementById('issueId').value);
+        let book = books.find(b => b.id === id);
+
+        if(!id || !book) {
+            showMsg('issueMsg', "Please enter a valid Book ID.", false);
+            return;
+        }
+        if(!book.avail) {
+            showMsg('issueMsg', `Book is already issued to ${book.borrower}.`, false);
+            return;
+        }
+
+        book.avail = false;
+        book.borrower = `${currentUser.name} (Adm: ${currentUser.adm})`;
+        renderBooks();
+        showMsg('issueMsg', `Successfully issued "${book.title}" to you!`, true);
+        document.getElementById('issueId').value = "";
+    }
+
+    function returnBook() {
+        let id = parseInt(document.getElementById('returnId').value);
+        let book = books.find(b => b.id === id);
+
+        if(!id || !book) {
+            showMsg('returnMsg', "Please enter a valid Book ID.", false);
+            return;
+        }
+        if(book.avail) {
+            showMsg('returnMsg', "This book is already on the shelf.", false);
+            return;
+        }
+
+        book.avail = true;
+        book.borrower = "-";
+        renderBooks();
+        showMsg('returnMsg', `Successfully returned "${book.title}" to library!`, true);
+        document.getElementById('returnId').value = "";
+    }
+</script>
+
+</body>
+</html>
